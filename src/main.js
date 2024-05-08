@@ -10,6 +10,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // VARIABLE
 // VARIABLE DOM
+const formSearch = document.querySelector(".form-search");
 const btnSearch = document.querySelector('.btn-search');
 const inputSearch = document.querySelector('.input-search');
 const gallery = document.querySelector('.gallery');
@@ -46,7 +47,7 @@ function errorMessage(data) {
 
 // CODE
 loader.style.display = 'none';
-btnSearch.addEventListener('click', event => {
+formSearch.addEventListener('submit', event => {
   event.preventDefault();
   gallery.textContent = '';
   searchParams.set("q",inputSearch.value)
@@ -59,7 +60,6 @@ btnSearch.addEventListener('click', event => {
   else {
     loader.style.display = 'block';
     const URL = `${urlApi}${searchParams}`;
-    setTimeout(() => {
       fetchPictures(URL).then(users => {
         if (users.hits.length === 0) {
           loader.style.display = 'none';
@@ -90,36 +90,6 @@ btnSearch.addEventListener('click', event => {
           inputSearch.value = '';
         }
       });
-    }, 1000);
   }
 });
 
-// const lightbox = new SimpleLightbox('.gallery a', {
-//     captionSelector: 'img',
-//     captions: true,
-//     captionType: 'attr',
-//     captionsData: 'alt',
-//     captionPosition: 'bottom',
-//     captionDelay: 250,
-//     overlayOpacity: 1,
-//     className: 'custom-lightbox',
-//     docClose:	true,
-//     animationSpeed:	500,
-//     // animationSlide:	true,
-//     fadeSpeed:	500,
-//     rtl:	true,
-//   })
-
-//   console.log(lightbox);
-
-//   const buttonArrow = document.querySelector("button")
-//   lightbox.on('shown.simplelightbox', function () {
-// 	const buttons = document.querySelectorAll("button");
-//   const counter = document.querySelector(".sl-counter");
-//   buttons.forEach(value => value.style.color ="white");
-//   counter.style.color ="white"
-
-// });
-
-// document.addEventListener("DOMContentLoaded", );
-// не "document.onDOMContentLoaded = ..."
